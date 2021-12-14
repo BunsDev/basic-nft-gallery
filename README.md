@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# NFT-Gallery
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+The app connects to your Metamask wallet and then loads a list of your ERC721 and ERC1155 NFTs using [Covalent's API](https://www.covalenthq.com/docs/api/#/0/Class-A/Get-token-balances-for-address/lng=en). Then it fetches the token metadata using each contract's `tokenURI` function and the metadata URL that we get from that.
+IPFS is not supported, so if the
+
+Improvement ideas:
+
+- ERC721 transfer function (right now it uses the ERC20 `transfer(to, amount)`)
+- use [`js-ipfs`](https://github.com/ipfs/js-ipfs) to fetch IPFS specific metadata
+- optimizing the loading of metadata
+  - only fetch metadata for components in view
+  - add timeouts so we don't get `HTTP 429 TOO_MANY_REQUESTS` errors
+  - don't display tokens where we can't fetch metadata e.g. IPFS
 
 ## Available Scripts
 
