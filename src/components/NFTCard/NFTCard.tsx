@@ -51,14 +51,41 @@ function NFTCardMetadata({ tokenURI }: { tokenURI: string }) {
   } = useFetchData<Metadata>(callFetchTokenURI);
 
   if (error) {
-    return <Button onClick={fetchData}>Reload image</Button>;
+    return (
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Button onClick={fetchData}>Reload image</Button>;
+      </Box>
+    );
   }
 
   if (loading || !metadata) {
     return <CenteredLoadingIndicator />;
   }
 
-  return <CardMedia component="img" height="335" image={metadata.image} />;
+  return (
+    <>
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CardMedia component="img" height="335" src={metadata.image} />
+      </Box>
+      <CardContent>
+        <Typography variant="caption">{metadata.name}</Typography>
+      </CardContent>
+    </>
+  );
 }
 
 function NFTDataRow({
@@ -109,16 +136,7 @@ function NFTCardContent({
 
   return (
     <>
-      <Box
-        sx={{
-          flexGrow: 1,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {tokenURI ? <NFTCardMetadata tokenURI={tokenURI} /> : null}
-      </Box>
+      {tokenURI ? <NFTCardMetadata tokenURI={tokenURI} /> : null}
       <CardContent
         sx={{
           height: "128px",
@@ -151,7 +169,7 @@ export default function NFTCard(props: NFTCardContentProps) {
   return (
     <Card
       sx={{
-        height: "500px",
+        height: "556px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
